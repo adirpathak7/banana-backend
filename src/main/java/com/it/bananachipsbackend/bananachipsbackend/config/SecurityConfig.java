@@ -23,18 +23,17 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
+        http
+                .csrf(csrf -> csrf.disable())
+                .cors(Customizer.withDefaults()) // Enable CORS with default configuration
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/banana/app/**").permitAll() // updated to requestMatchers
+                        .requestMatchers("/banana/app/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
     }
-
-
-
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -49,7 +48,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOriginPattern("https://webbanana-eight.vercel.app"); // Use addAllowedOriginPattern for dynamic domains
+        configuration.addAllowedOriginPattern("https://webbanana-eight.vercel.app");
         configuration.addAllowedOriginPattern("http://localhost:3000");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
