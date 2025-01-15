@@ -23,13 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000", "https://webbanana-eight.vercel.app"}, allowCredentials = "true")
-@RequestMapping(value = "/banana/app/admin/product")
+@RequestMapping(value = "/banana/app")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    @PostMapping(value = "/addProduct", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/admin/product/addProduct", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Map<String, String>> addProduct(
             @RequestParam("productName") String productName,
             @RequestParam("description") String description,
@@ -48,7 +48,7 @@ public class ProductController {
         return new ResponseEntity<>(signUpResponse, HttpStatus.OK);
     }
 
-    @GetMapping("/allProducts")
+    @GetMapping("/admin/product/allProducts")
     public ResponseEntity<List<ProductEntity>> getAllProducts() {
         List<ProductEntity> products = productService.getAllProducts();
         return new ResponseEntity<>(products, HttpStatus.OK);
