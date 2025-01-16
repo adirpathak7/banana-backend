@@ -26,6 +26,7 @@ public class UserController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello() {
+        System.out.println("api called");
         return "Hello World!";
     }
 
