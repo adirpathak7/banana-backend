@@ -12,5 +12,4 @@ public class BananachipsbackendApplication {
 		SpringApplication.run(BananachipsbackendApplication.class, args);
 		System.out.println("Server started.");
 	}
-
 }
